@@ -30,6 +30,8 @@
         <div class="row">
             <div class="col-sm-12 mb-4">
                 <input type="search" id="search" class="form-control form-control-lg" placeholder="Escreva Algo Aqui" onkeyup="getSearch(this)">
+
+                <h1 class="text-center text-info mt-5" id="info"></h1>
             </div>
         </div>
 
@@ -45,10 +47,16 @@
                 if (e.keyCode == 13) {
                     $.ajax({
                         type: "GET",
-                        url: "Classes/GetImages.php?url=" + $("#search").val(),
+                        url: "/Classes/GetImages.php?url=" + $("#search").val(),
                         dataType: "html",
+                        beforeSend: function(){
+                            $("#info").html("Pesquisando ...")
+                            $("#images_search").html("")
+                            $("#search").attr("disabled",true)
+                        },
                         success: function(response) {
-                            console.log(response)
+                            $("#info").html("")
+                            $("#search").attr("disabled",false)
                             $("#images_search").html(response)
                         }
                     });
