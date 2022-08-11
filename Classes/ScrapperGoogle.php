@@ -13,7 +13,11 @@ class ScrapperGoogle
         foreach ($data as $dat) {
             if (strpos($dat->getAttribute('class'), 'yWs4tf') === 0) {
                 $count++;
-                $data_code .= "<img  width='200'src='" . $dat->getAttribute('src') . "'>";
+                $data_code .= '
+                            <div class="col-sm-6">
+                                <img src="' . $dat->getAttribute('src') . '" class="img-thumbnail" alt="...">
+                            </div>
+                ';
                 if ($count == 1) {
                     break;
                 }
